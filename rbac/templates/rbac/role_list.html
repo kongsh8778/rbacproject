@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+{#    <div class="col-sm-3" style="padding: 10px;">#}
+        <a href="{% url 'rbac:role_add' %}" class="btn btn-success">添加</a>
+
+    <table class="table table-hover table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>名称</th>
+            <th>个数</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for row in query_set %}
+            <tr>
+                <td>{{ row.id }}</td>
+                <td>{{ row.title }}</td>
+                <td>{{ row.permissions.count }}</td>
+                <td>
+                    <a href="{% url 'rbac:role_edit' uid=row.id %}"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                    <span> | </span>
+                    <a href="{% url 'rbac:role_del' uid=row.id %}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                </td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+{#    </div>#}
+{% endblock %}

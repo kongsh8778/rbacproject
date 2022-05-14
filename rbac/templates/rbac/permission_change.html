@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% load rbac %}
+
+{% block content %}
+    <div class="container">
+        <form method="post" class="form-horizontal" novalidate>
+            {% csrf_token %}
+            {% for item in form %}
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">{{ item.label }}</label>
+                    <div class="col-sm-6">
+                        {{ item }}
+                    </div>
+                    <div class="cl-sm-4 control-label" style="text-align: left;">
+                        <span style="color: red;font-weight:normal; ">{{ item.errors.0 }}</span>
+                        <label style="color: #9d9d9d;font-weight:normal; ">{{ item.help_text }}</label>
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-6">
+                    <input type="submit" value="提交" class="btn btn-primary">
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
